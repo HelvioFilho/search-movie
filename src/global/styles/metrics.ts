@@ -6,7 +6,7 @@ const baseWidth = 375;
 const px = (valuePx: number) => {
   const withPercent = (valuePx / baseWidth) * 100;
   const screenPixel = PixelRatio.roundToNearestPixel(
-    (width / withPercent) / 100
+    (width * withPercent) / 100
   );
   return screenPixel;
 }
