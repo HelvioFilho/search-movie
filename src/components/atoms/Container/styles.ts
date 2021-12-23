@@ -4,8 +4,8 @@ import { ContainerProps } from '../../../utils/interface';
 export const ContainerAll = styled.View<ContainerProps>`
   display: flex;
   ${({ flex }) => flex ? `flex:${flex};` : ``}
-  height: ${({ theme, height }) => (height ? `${theme.metrics.px(height)}px` : '100%')};
-  width: ${({ theme, width }) => (width ? `${theme.metrics.px(width)}px` : '100%')};
+  width: ${({ theme, width }) => (width ? (Number.isInteger(width) ? `${theme.metrics.px(width as number)}px` : width) : 'auto')};
+  height: ${({ theme, height }) => (height ? (Number.isInteger(height) ? `${theme.metrics.px(height as number)}px` : height) : 'auto')};
   flex-direction: ${({ direction }) => direction || 'column'};
   align-items: ${({ align }) => align || 'flex-start'};
   justify-content: ${({ justify }) => justify || 'flex-start'};

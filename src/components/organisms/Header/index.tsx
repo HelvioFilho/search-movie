@@ -15,7 +15,12 @@ export function Header({ title }: TitleProps) {
       pl={14}
     >
       <IconButton
+        height={70}
+        direction="row"
+        align="center"
         name="menu"
+        color="white"
+        size={36}
         onPress={() => navigation.openDrawer()}
       />
       <CustomText

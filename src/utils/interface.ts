@@ -19,8 +19,8 @@ export interface ContainerProps extends MetricsProps {
   align?: string;
   justify?: string;
   bg?: keyof typeof colors;
-  width?: number;
-  height?: number;
+  width?: number | string;
+  height?: number | string;
   flex?: number | string;
 }
 
@@ -35,7 +35,9 @@ export interface TitleProps {
   title: string;
 }
 
-export interface IconProps {
-  onPress: () => void;
-  name: React.ComponentProps<typeof Feather>['name'];
+export interface IconProps extends ContainerProps {
+  onPress?: () => void;
+  name?: React.ComponentProps<typeof Feather>['name'];
+  size?: number;
+  color?: keyof typeof colors;
 }

@@ -5,8 +5,7 @@ import { Icon } from './styles';
 import { defaultTheme } from '../../../global';
 import { IconProps } from '../../../utils/interface';
 
-export function IconButton({ name, onPress, ...props }: IconProps) {
-
+export function IconButton({ name, size, color, onPress, ...props }: IconProps) {
 
   return (
     <Icon
@@ -15,8 +14,8 @@ export function IconButton({ name, onPress, ...props }: IconProps) {
     >
       <Feather
         name={name}
-        size={defaultTheme.metrics.px(36)}
-        color={defaultTheme.colors.white}
+        size={size}
+        color={defaultTheme.colors[color || 'white']}
       />
     </Icon>
   );
