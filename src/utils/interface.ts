@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { Feather } from '@expo/vector-icons';
 import { colors, fonts } from '../global';
 
 export interface MetricsProps {
@@ -34,3 +35,7 @@ export interface TitleProps {
   title: string;
 }
 
+export interface IconProps {
+  onPress: () => void;
+  name: React.ComponentProps<typeof Feather>['name'];
+}

@@ -1,16 +1,20 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+
 import { Feather } from '@expo/vector-icons';
 import { Icon } from './styles';
 import { defaultTheme } from '../../../global';
+import { IconProps } from '../../../utils/interface';
 
-export function IconButton({ ...props }) {
-  const navigation = useNavigation<any>();
+export function IconButton({ name, onPress, ...props }: IconProps) {
+
 
   return (
-    <Icon onPress={() => navigation.openDrawer()} {...props}>
+    <Icon
+      onPress={onPress}
+      {...props}
+    >
       <Feather
-        name="menu"
+        name={name}
         size={defaultTheme.metrics.px(36)}
         color={defaultTheme.colors.white}
       />

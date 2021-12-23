@@ -1,10 +1,17 @@
 import React from 'react';
+import { Container } from '../../components';
 
-import { Container, Title } from './styles';
+import { Title } from './styles';
 
 export function Movies() {
   return (
-    <Container>
+    <Container
+      flex={1}
+      direction="row"
+      bg="bg"
+      align="center"
+      justify="center"
+    >
       <Title> Tela Movies</Title>
     </Container>
   );

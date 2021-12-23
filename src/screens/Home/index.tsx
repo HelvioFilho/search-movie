@@ -1,8 +1,6 @@
 import React from 'react';
 import { Container, Header } from '../../components';
 
-
-
 export function Home() {
   return (
     <Container
