@@ -1,11 +1,17 @@
 import React from 'react';
+import { Container, Header } from '../../components';
 
-import { Container, Title } from './styles';
+
 
 export function Home() {
   return (
-    <Container>
-      <Title> Tela Home</Title>
+    <Container
+      flex={1}
+      bg="bg"
+      pt={4}
+      pb={4}
+    >
+      <Header title="React Prime" />
     </Container>
   );
 }
