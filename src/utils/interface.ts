@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { ImageProps } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { colors, fonts } from '../global';
 
@@ -40,4 +41,10 @@ export interface IconProps extends ContainerProps {
   name?: React.ComponentProps<typeof Feather>['name'];
   size?: number;
   color?: keyof typeof colors;
+}
+
+export interface ImgProps extends ImageProps, MetricsProps {
+  br?: number;
+  CWidth?: number | string;
+  CHeight?: number | string;
 }
