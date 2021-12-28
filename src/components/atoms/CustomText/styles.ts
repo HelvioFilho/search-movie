@@ -10,4 +10,8 @@ export const Text = styled.Text<TextProps>`
   margin-right: ${({ theme, mr }) => theme.metrics.px(mr || 0)}px;
   margin-top: ${({ theme, mt }) => theme.metrics.px(mt || 0)}px;
   margin-bottom: ${({ theme, mb }) => theme.metrics.px(mb || 0)}px;
+  padding-left: ${({ theme, pl }) => theme.metrics.px(pl || 0)}px;
+  padding-right: ${({ theme, pr }) => theme.metrics.px(pr || 0)}px;
+  padding-top: ${({ theme, pt }) => theme.metrics.px(pt || 0)}px;
+  padding-bottom: ${({ theme, pb }) => theme.metrics.px(pb || 0)}px;
 `;
