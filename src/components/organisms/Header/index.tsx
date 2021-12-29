@@ -18,7 +18,7 @@ export function Header({ title }: TitleProps) {
         height={70}
         direction="row"
         align="center"
-        name="menu"
+        feather="menu"
         color="white"
         size={36}
         onPress={() => navigation.openDrawer()}

@@ -27,7 +27,10 @@ export function Home() {
           onPress={() => { }}
         />
       </CustomInput>
-      <ScrollView style={{ width: '100%', }}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{ width: '100%', }}
+      >
         <CustomText
           pt={20}
           pb={8}
@@ -53,8 +56,46 @@ export function Home() {
 
         <Slider
           horizontal={true}
+          showsHorizontalScrollIndicator={false}
           data={[1, 2, 3, 4]}
           renderItem={({ item }) => <SliderMovie />}
+
+        />
+        <CustomText
+          pt={10}
+          pb={5}
+          pl={14}
+          pr={14}
+          fontFamily="bold"
+          size={24}
+          color="white"
+        >
+          Populares
+        </CustomText>
+        <Slider
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          data={[1, 2, 3, 4]}
+          renderItem={({ item }) => <SliderMovie />}
+
+        />
+        <CustomText
+          pt={10}
+          pb={5}
+          pl={14}
+          pr={14}
+          fontFamily="bold"
+          size={24}
+          color="white"
+        >
+          Mais Votados
+        </CustomText>
+        <Slider
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          data={[1, 2, 3, 4]}
+          renderItem={({ item }) => <SliderMovie />}
+
         />
       </ScrollView>
     </Container>

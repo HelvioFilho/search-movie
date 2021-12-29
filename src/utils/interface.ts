@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-import { ImageProps } from 'react-native';
-import { Feather } from '@expo/vector-icons';
+import { ImageProps, TextProps } from 'react-native';
+import { Feather, Ionicons } from '@expo/vector-icons';
 import { colors, fonts } from '../global';
 
 export interface MetricsProps {
@@ -25,7 +25,7 @@ export interface ContainerProps extends MetricsProps {
   flex?: number | string;
 }
 
-export interface TextProps extends MetricsProps {
+export interface CustomTextProps extends TextProps, MetricsProps {
   color?: keyof typeof colors;
   fontFamily?: keyof typeof fonts;
   size?: number;
@@ -38,7 +38,8 @@ export interface TitleProps {
 
 export interface IconProps extends ContainerProps {
   onPress?: () => void;
-  name?: React.ComponentProps<typeof Feather>['name'];
+  feather?: React.ComponentProps<typeof Feather>['name'];
+  ionicons?: React.ComponentProps<typeof Ionicons>['name'];
   size?: number;
   color?: keyof typeof colors;
 }
