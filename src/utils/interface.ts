@@ -49,3 +49,15 @@ export interface ImgProps extends ImageProps, MetricsProps {
   CWidth?: number | string;
   CHeight?: number | string;
 }
+
+export interface MovieProps {
+  id: number;
+  title: string;
+  overview: string;
+  vote_average: number;
+  poster_path: string;
+}
+
+export interface SliderMovieProps {
+  data: MovieProps;
+}
