@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Container, CustomImage, CustomText, Header, IconButton, SliderMovie } from '../../components';
-import { CustomInput } from '../../components/atoms/CustomInput';
-import { FlatList, ScrollView } from 'react-native';
+import {
+  Container,
+  CustomImage,
+  CustomText,
+  CustomInput,
+  Header,
+  IconButton,
+  SliderMovie
+} from '../../components';
+import { ScrollView, ActivityIndicator } from 'react-native';
 import { Slider } from './styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { api } from '../../services/api';
-import { getListMovies } from '../../utils/movie';
-import { MovieProps } from '../../utils/interface';
+import { getListMovies, radomBanner } from '../../utils/movie';
+import { MovieProps, stackParamList } from '../../utils/interface';
+import { defaultTheme } from '../../global';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
 
 const { API_KEY } = process.env;
 
@@ -15,9 +24,14 @@ export function Home() {
   const [nowMovies, setNowMovies] = useState<MovieProps[]>([] as MovieProps[]);
   const [popularMovies, setPopularMovies] = useState<MovieProps[]>([]);
   const [topMovies, setTopMovies] = useState<MovieProps[]>([]);
+  const [bannerMovie, setBannerMovie] = useState<MovieProps>({} as MovieProps);
+  const [loading, setLoading] = useState(true);
+
+  const navigation = useNavigation<NavigationProp<stackParamList>>();
 
   useEffect(() => {
     let isActive = true;
+    const ac = new AbortController();
 
     async function getMovies() {
       const [nowData, popularData, topData] = await Promise.all([
@@ -47,16 +61,44 @@ export function Home() {
           }),
       ]);
 
-      const nowList = getListMovies(10, nowData.data.results);
-      const popularList = getListMovies(5, popularData.data.results);
-      const topList = getListMovies(5, topData.data.results);
-      setNowMovies(nowList);
-      setPopularMovies(popularList);
-      setTopMovies(topList);
+      if (isActive) {
+        const nowList = getListMovies(10, nowData.data.results);
+        const popularList = getListMovies(5, popularData.data.results);
+        const topList = getListMovies(5, topData.data.results);
+        setBannerMovie(nowData.data.results[radomBanner(nowData.data.results)]);
+        setNowMovies(nowList);
+        setPopularMovies(popularList);
+        setTopMovies(topList);
+        setLoading(false);
+      }
     }
 
     getMovies();
+
+    return () => {
+      isActive = false;
+      ac.abort();
+    }
   }, [])
+
+  function navigateDetailsPage(item: MovieProps) {
+    navigation.navigate('Detail', { id: item.id });
+  }
+
+  if (loading) {
+    return (
+      <Container
+        flex={1}
+        bg="bg"
+        pt={4}
+        pb={4}
+        align="center"
+        justify="center"
+      >
+        <ActivityIndicator size="large" color={defaultTheme.colors.white} />
+      </Container>
+    )
+  }
 
   return (
     <Container
@@ -96,13 +138,13 @@ export function Home() {
         >
           Em cartaz
         </CustomText>
-        <TouchableOpacity activeOpacity={0.7} onPress={() => alert('Olá')}>
+        <TouchableOpacity activeOpacity={0.7} onPress={() => navigateDetailsPage(bannerMovie)}>
           <CustomImage
             CHeight={150}
             br={6}
             ml={14}
             mr={14}
-            source={{ uri: 'https://t.ctcdn.com.br/LgGjtcVIc3Z5KpC2RmjMNsop51k=/512x288/smart/i487836.jpeg' }}
+            source={{ uri: `https://image.tmdb.org/t/p/original${bannerMovie.poster_path}` }}
             resizeMethod="resize"
           />
         </TouchableOpacity>
@@ -112,7 +154,7 @@ export function Home() {
           showsHorizontalScrollIndicator={false}
           data={nowMovies}
           keyExtractor={(item) => String(item.id)}
-          renderItem={({ item }) => <SliderMovie data={item} />}
+          renderItem={({ item }) => <SliderMovie data={item} navigatePage={() => navigateDetailsPage(item)} />}
         />
         <CustomText
           pt={10}
@@ -130,7 +172,7 @@ export function Home() {
           showsHorizontalScrollIndicator={false}
           data={popularMovies}
           keyExtractor={(item) => String(item.id)}
-          renderItem={({ item }) => <SliderMovie data={item} />}
+          renderItem={({ item }) => <SliderMovie data={item} navigatePage={() => navigateDetailsPage(item)} />}
         />
         <CustomText
           pt={10}
@@ -148,7 +190,7 @@ export function Home() {
           showsHorizontalScrollIndicator={false}
           data={topMovies}
           keyExtractor={(item) => String(item.id)}
-          renderItem={({ item }) => <SliderMovie data={item} />}
+          renderItem={({ item }) => <SliderMovie data={item} navigatePage={() => navigateDetailsPage(item)} />}
         />
       </ScrollView>
     </Container>

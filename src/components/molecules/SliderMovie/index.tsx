@@ -1,9 +1,9 @@
 import React from 'react';
-import { Container, CustomImage, CustomText, IconButton } from '../..';
+import { Container, CustomImage, CustomText, IconButton } from '../../atoms';
 import { SliderMovieProps } from '../../../utils/interface';
 import { Touch } from './styles';
 
-export function SliderMovie({ data }: SliderMovieProps) {
+export function SliderMovie({ data, navigatePage }: SliderMovieProps) {
   return (
 
     <Container
@@ -11,7 +11,7 @@ export function SliderMovie({ data }: SliderMovieProps) {
       pb={16}
       pt={16}
     >
-      <Touch activeOpacity={.7} >
+      <Touch activeOpacity={.7} onPress={() => navigatePage(data)} >
         <CustomImage
           CWidth="100%"
           CHeight={170}
