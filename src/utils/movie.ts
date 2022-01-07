@@ -7,3 +7,7 @@ export function getListMovies(size: number, movies: MovieProps[]) {
   }
   return FilterMovies;
 }
+
+export function radomBanner(movies: MovieProps[]) {
+  return Math.floor(Math.random() * movies.length);
+}

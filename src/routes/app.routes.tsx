@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { ParamListBase } from '@react-navigation/native';
 import { defaultTheme } from '../global/styles/theme';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Home, Movies } from '../screens';
+import { Home, Movies, Detail } from '../screens';
 
 function StackRoute() {
   const { Navigator, Screen } = createNativeStackNavigator<ParamListBase>();
@@ -16,6 +16,14 @@ function StackRoute() {
         component={Home}
         options={{
           headerShown: false,
+        }}
+      />
+      <Screen
+        name="Detail"
+        component={Detail}
+        options={{
+          headerShown: false,
+          title: 'Detalhes'
         }}
       />
     </Navigator>

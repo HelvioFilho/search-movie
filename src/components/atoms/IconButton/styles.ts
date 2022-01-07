@@ -7,5 +7,15 @@ export const Icon = styled.TouchableOpacity<IconProps>`
   flex-direction: ${({ direction }) => direction || 'column'};
   align-items: ${({ align }) => align || 'flex-start'};
   justify-content: ${({ justify }) => justify || 'flex-start'};
-
+  border-radius: ${({ br, theme }) => theme.metrics.px(br || 0)}px;
+  ${({ bg, theme }) => bg ? `background-color: ${theme.colors[bg]};` : ""}
+  ${({ redBottom, theme }) => redBottom ?
+    `
+    position: absolute;
+    top: ${theme.metrics.px(310)}px;
+    right: ${theme.metrics.px(15)}px;
+    z-index: 999;
+    `
+    : ''
+  }
 `;

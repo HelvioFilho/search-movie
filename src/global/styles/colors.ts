@@ -6,4 +6,5 @@ export const colors = {
   bg: '#191A30',
   clean: '#384058',
   warning: '#FABB1E',
+  bgIcon: 'rgba(25,26,48,0.8)',
 }

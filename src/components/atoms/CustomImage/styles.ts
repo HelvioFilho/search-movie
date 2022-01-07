@@ -11,4 +11,6 @@ export const Image = styled.Image<ImgProps>`
   margin-right: ${({ theme, mr }) => theme.metrics.px(mr || 0)}px;
   margin-top: ${({ theme, mt }) => theme.metrics.px(mt || 0)}px;
   margin-bottom: ${({ theme, mb }) => theme.metrics.px(mb || 0)}px;
+  ${({ theme, bblr }) => bblr ? `border-bottom-left-radius: ${theme.metrics.px(bblr)}px;` : ''}
+  ${({ theme, bbrr }) => bbrr ? `border-bottom-right-radius: ${theme.metrics.px(bbrr)}px;` : ''}
 `;

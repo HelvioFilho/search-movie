@@ -42,12 +42,16 @@ export interface IconProps extends ContainerProps {
   ionicons?: React.ComponentProps<typeof Ionicons>['name'];
   size?: number;
   color?: keyof typeof colors;
+  br?: number;
+  redBottom: boolean;
 }
 
 export interface ImgProps extends ImageProps, MetricsProps {
   br?: number;
   CWidth?: number | string;
   CHeight?: number | string;
+  bblr?: number;
+  bbrr?: number;
 }
 
 export interface MovieProps {
@@ -60,4 +64,9 @@ export interface MovieProps {
 
 export interface SliderMovieProps {
   data: MovieProps;
+  navigatePage: (data: MovieProps) => void;
+}
+
+export type stackParamList = {
+  Detail: { id: number }
 }

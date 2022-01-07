@@ -9,6 +9,7 @@ export function IconButton({ feather, ionicons, size, color, onPress, ...props }
   return (
     <Icon
       onPress={onPress}
+      activeOpacity={0.8}
       {...props}
     >
       {feather &&
