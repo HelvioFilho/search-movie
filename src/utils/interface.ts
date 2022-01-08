@@ -18,7 +18,7 @@ export interface MetricsProps {
 export interface ContainerProps extends MetricsProps {
   direction?: string;
   align?: string;
-  justify?: string;
+  justify?: 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly';
   bg?: keyof typeof colors;
   width?: number | string;
   height?: number | string;
@@ -30,6 +30,7 @@ export interface CustomTextProps extends TextProps, MetricsProps {
   fontFamily?: keyof typeof fonts;
   size?: number;
   align?: string;
+  width?: number | string;
 }
 
 export interface TitleProps {
@@ -43,7 +44,7 @@ export interface IconProps extends ContainerProps {
   size?: number;
   color?: keyof typeof colors;
   br?: number;
-  redBottom: boolean;
+  redBottom?: boolean;
 }
 
 export interface ImgProps extends ImageProps, MetricsProps {
@@ -69,4 +70,13 @@ export interface SliderMovieProps {
 
 export type stackParamList = {
   Detail: { id: number }
+}
+
+export interface StarProps {
+  rate: number;
+}
+
+export interface ListStarProps {
+  id: number;
+  type: string;
 }

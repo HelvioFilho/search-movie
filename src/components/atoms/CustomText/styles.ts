@@ -14,4 +14,5 @@ export const Text = styled.Text<CustomTextProps>`
   padding-right: ${({ theme, pr }) => theme.metrics.px(pr || 0)}px;
   padding-top: ${({ theme, pt }) => theme.metrics.px(pt || 0)}px;
   padding-bottom: ${({ theme, pb }) => theme.metrics.px(pb || 0)}px;
+  width: ${({ theme, width }) => (width ? (Number.isInteger(width) ? `${theme.metrics.px(width as number)}px` : width) : 'auto')};
 `;

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Container, CustomImage, CustomText, IconButton } from '../../components';
+import { Container, CustomImage, CustomText, IconButton, StarIcon } from '../../components';
 import { HeaderDetail } from './styles';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+
 import { api } from '../../services/api';
 const { API_KEY } = process.env;
-
 import { MovieProps, stackParamList } from '../../utils/interface';
 
 export function Detail() {
@@ -90,16 +90,46 @@ export function Detail() {
         align="center"
         redBottom={true}
       />
-      <CustomText
-        numberOfLines={2}
-        size={22}
-        fontFamily="bold"
-        pt={8}
-        pb={8}
+      <Container
+        bg="bg"
+        direction="row"
+        align="center"
+        justify="space-between"
+        width="100%"
+      >
+        <CustomText
+          numberOfLines={2}
+          size={22}
+          fontFamily="bold"
+          pt={20}
+          pb={8}
+          pl={14}
+          pr={14}
+          mt={12}
+          width="75%"
+        >{movie.title}</CustomText>
+        <CustomText
+          size={22}
+          fontFamily="bold"
+          pt={20}
+          pb={8}
+          pl={14}
+          pr={14}
+          mt={12}
+          width="25%"
+          align="right"
+        >{movie.vote_average}/10</CustomText>
+      </Container>
+      <Container
+        direction="row"
+        bg="bg"
+        align="center"
+        justify="space-between"
         pl={14}
         pr={14}
-        mt={12}
-      >{movie.title}</CustomText>
+      >
+        <StarIcon rate={movie.vote_average} />
+      </Container>
     </Container>
   );
 }
