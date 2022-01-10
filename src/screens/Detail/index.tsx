@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Container, CustomImage, CustomText, IconButton, StarIcon } from '../../components';
-import { HeaderDetail } from './styles';
+import { Container, CustomImage, CustomText, Genres, IconButton, StarIcon } from '../../components';
+import { HeaderDetail, ListGenres } from './styles';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 
 import { api } from '../../services/api';
 const { API_KEY } = process.env;
 import { MovieProps, stackParamList } from '../../utils/interface';
 
+
 export function Detail() {
 
   const navigation = useNavigation();
   const route = useRoute<RouteProp<stackParamList>>();
-
   const [movie, setMovie] = useState<MovieProps>({} as MovieProps);
 
   useEffect(() => {
@@ -27,6 +27,7 @@ export function Detail() {
 
       if (isActive) {
         setMovie(response.data);
+
       }
     }
 
@@ -37,7 +38,7 @@ export function Detail() {
     return () => {
       isActive = false;
     }
-  }, [])
+  }, []);
 
   return (
     <Container
@@ -130,6 +131,13 @@ export function Detail() {
       >
         <StarIcon rate={movie.vote_average} />
       </Container>
+      <ListGenres
+        data={movie?.genres}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={(item) => String(item.id)}
+        renderItem={(genres) => <Genres genres={genres.item} />}
+      />
     </Container>
   );
 }

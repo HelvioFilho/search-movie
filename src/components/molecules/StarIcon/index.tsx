@@ -55,6 +55,7 @@ export function StarIcon({ rate }: StarProps) {
     >
       <FlatList
         horizontal
+        showsHorizontalScrollIndicator={false}
         data={starRate}
         keyExtractor={(item) => String(item.id)}
         renderItem={(data) => <Ionicons

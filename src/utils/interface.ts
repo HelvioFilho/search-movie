@@ -23,6 +23,7 @@ export interface ContainerProps extends MetricsProps {
   width?: number | string;
   height?: number | string;
   flex?: number | string;
+  br?: number;
 }
 
 export interface CustomTextProps extends TextProps, MetricsProps {
@@ -55,12 +56,22 @@ export interface ImgProps extends ImageProps, MetricsProps {
   bbrr?: number;
 }
 
+interface GenresProps {
+  id: number,
+  name: string,
+}
+
 export interface MovieProps {
   id: number;
   title: string;
   overview: string;
   vote_average: number;
   poster_path: string;
+  genres: [GenresProps];
+}
+
+export interface GenresListProps {
+  genres: GenresProps;
 }
 
 export interface SliderMovieProps {
