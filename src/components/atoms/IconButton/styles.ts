@@ -12,7 +12,7 @@ export const Icon = styled.TouchableOpacity<IconProps>`
   ${({ redBottom, theme }) => redBottom ?
     `
     position: absolute;
-    top: ${theme.metrics.px(310)}px;
+    top: ${theme.metrics.px(305)}px;
     right: ${theme.metrics.px(15)}px;
     z-index: 999;
     `

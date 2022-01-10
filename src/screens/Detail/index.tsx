@@ -6,6 +6,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { api } from '../../services/api';
 const { API_KEY } = process.env;
 import { MovieProps, stackParamList } from '../../utils/interface';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 export function Detail() {
@@ -102,7 +103,7 @@ export function Detail() {
           numberOfLines={2}
           size={22}
           fontFamily="bold"
-          pt={20}
+          pt={12}
           pb={8}
           pl={14}
           pr={14}
@@ -112,7 +113,7 @@ export function Detail() {
         <CustomText
           size={22}
           fontFamily="bold"
-          pt={20}
+          pt={12}
           pb={8}
           pl={14}
           pr={14}
@@ -138,6 +139,22 @@ export function Detail() {
         keyExtractor={(item) => String(item.id)}
         renderItem={(genres) => <Genres genres={genres.item} />}
       />
+      <CustomText
+        size={22}
+        fontFamily="bold"
+        pl={14}
+        pr={14}
+        pt={10}
+        pb={10}
+      >Descrição</CustomText>
+      <ScrollView showsHorizontalScrollIndicator={false}>
+        <CustomText
+          pl={14}
+          pr={14}
+          pb={30}
+          lineHeight={20}
+        >{movie.overview}</CustomText>
+      </ScrollView>
     </Container>
   );
 }

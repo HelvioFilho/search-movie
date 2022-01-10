@@ -32,6 +32,7 @@ export interface CustomTextProps extends TextProps, MetricsProps {
   size?: number;
   align?: string;
   width?: number | string;
+  lineHeight?: number;
 }
 
 export interface TitleProps {

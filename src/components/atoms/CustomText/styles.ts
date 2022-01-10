@@ -15,4 +15,5 @@ export const Text = styled.Text<CustomTextProps>`
   padding-top: ${({ theme, pt }) => theme.metrics.px(pt || 0)}px;
   padding-bottom: ${({ theme, pb }) => theme.metrics.px(pb || 0)}px;
   width: ${({ theme, width }) => (width ? (Number.isInteger(width) ? `${theme.metrics.px(width as number)}px` : width) : 'auto')};
+  ${({ theme, lineHeight }) => (lineHeight ? `line-height: ${theme.metrics.px(lineHeight)}px;` : '')}
 `;
