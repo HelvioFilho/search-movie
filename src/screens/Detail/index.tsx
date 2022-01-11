@@ -33,9 +33,7 @@ export function Detail() {
       }
     }
 
-    if (isActive) {
-      getMovie();
-    }
+    getMovie();
 
     return () => {
       isActive = false;
