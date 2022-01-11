@@ -58,8 +58,8 @@ export interface ImgProps extends ImageProps, MetricsProps {
 }
 
 interface GenresProps {
-  id: number,
-  name: string,
+  id: number;
+  name: string;
 }
 
 export interface MovieProps {
@@ -68,6 +68,7 @@ export interface MovieProps {
   overview: string;
   vote_average: number;
   poster_path: string;
+  homepage: string;
   genres: [GenresProps];
 }
 
@@ -91,4 +92,10 @@ export interface StarProps {
 export interface ListStarProps {
   id: number;
   type: string;
+}
+
+export interface ModalLinkProps {
+  link: string;
+  title: string;
+  closeModal: () => void;
 }

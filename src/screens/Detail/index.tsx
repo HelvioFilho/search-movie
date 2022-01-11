@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, CustomImage, CustomText, Genres, IconButton, StarIcon } from '../../components';
+import { Container, CustomImage, CustomText, Genres, IconButton, ModalLink, StarIcon } from '../../components';
 import { HeaderDetail, ListGenres } from './styles';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 
@@ -7,6 +7,7 @@ import { api } from '../../services/api';
 const { API_KEY } = process.env;
 import { MovieProps, stackParamList } from '../../utils/interface';
 import { ScrollView } from 'react-native-gesture-handler';
+import { Modal } from 'react-native';
 
 
 export function Detail() {
@@ -14,6 +15,7 @@ export function Detail() {
   const navigation = useNavigation();
   const route = useRoute<RouteProp<stackParamList>>();
   const [movie, setMovie] = useState<MovieProps>({} as MovieProps);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     let isActive = true;
@@ -28,7 +30,6 @@ export function Detail() {
 
       if (isActive) {
         setMovie(response.data);
-
       }
     }
 
@@ -42,10 +43,10 @@ export function Detail() {
   }, []);
 
   return (
+
     <Container
       flex={1}
       bg="bg"
-      pt={4}
       pb={4}
     >
       <HeaderDetail>
@@ -80,18 +81,21 @@ export function Detail() {
         bblr={50}
         bbrr={50}
       />
-      <IconButton
-        feather="link"
-        size={28}
-        color="white"
-        bg="cta"
-        width={63}
-        height={63}
-        br={35}
-        justify="center"
-        align="center"
-        redBottom={true}
-      />
+      {movie.homepage !== '' &&
+        <IconButton
+          feather="link"
+          size={28}
+          color="white"
+          bg="cta"
+          width={63}
+          height={63}
+          br={35}
+          justify="center"
+          align="center"
+          redBottom={true}
+          onPress={() => setVisible(true)}
+        />
+      }
       <Container
         bg="bg"
         direction="row"
@@ -155,6 +159,17 @@ export function Detail() {
           lineHeight={20}
         >{movie.overview}</CustomText>
       </ScrollView>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={visible}
+      >
+        <ModalLink
+          link={movie?.homepage}
+          title={movie?.title}
+          closeModal={() => setVisible(false)}
+        />
+      </Modal>
     </Container>
   );
 }
