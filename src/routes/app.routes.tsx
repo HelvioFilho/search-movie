@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { ParamListBase } from '@react-navigation/native';
 import { defaultTheme } from '../global/styles/theme';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Home, Movies, Detail } from '../screens';
+import { Home, Movies, Detail, Search } from '../screens';
 
 function StackRoute() {
   const { Navigator, Screen } = createNativeStackNavigator<ParamListBase>();
@@ -24,6 +24,20 @@ function StackRoute() {
         options={{
           headerShown: false,
           title: 'Detalhes'
+        }}
+      />
+      <Screen
+        name="Search"
+        component={Search}
+        options={{
+          title: 'Sua busca',
+          headerTintColor: defaultTheme.colors.white,
+          headerTitleStyle: {
+            color: defaultTheme.colors.white,
+          },
+          headerStyle: {
+            backgroundColor: defaultTheme.colors.bg
+          }
         }}
       />
     </Navigator>

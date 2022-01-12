@@ -21,11 +21,12 @@ const { API_KEY } = process.env;
 
 export function Home() {
 
+  const [loading, setLoading] = useState(true);
   const [nowMovies, setNowMovies] = useState<MovieProps[]>([] as MovieProps[]);
   const [popularMovies, setPopularMovies] = useState<MovieProps[]>([]);
   const [topMovies, setTopMovies] = useState<MovieProps[]>([]);
   const [bannerMovie, setBannerMovie] = useState<MovieProps>({} as MovieProps);
-  const [loading, setLoading] = useState(true);
+  const [input, setInput] = useState('');
 
   const navigation = useNavigation<NavigationProp<stackParamList>>();
 
@@ -85,6 +86,12 @@ export function Home() {
     navigation.navigate('Detail', { id: item.id });
   }
 
+  function handleSearchMovie() {
+    if (input === '') return;
+    navigation.navigate('Search', { search: input });
+    setInput('');
+  }
+
   if (loading) {
     return (
       <Container
@@ -107,9 +114,11 @@ export function Home() {
       pt={4}
       pb={4}
     >
-      <Header title="React Prime" />
+      <Header title="Cinema Prime" />
       <CustomInput
         placeholder="Coloque o nome do filme..."
+        value={input}
+        onChangeText={(text) => setInput(text)}
       >
         <IconButton
           width="15%"
@@ -119,7 +128,7 @@ export function Home() {
           feather="search"
           size={30}
           color="white"
-          onPress={() => { }}
+          onPress={handleSearchMovie}
         />
       </CustomInput>
       <ScrollView

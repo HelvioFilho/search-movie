@@ -82,7 +82,8 @@ export interface SliderMovieProps {
 }
 
 export type stackParamList = {
-  Detail: { id: number }
+  Detail: { id: number };
+  Search: { search: string };
 }
 
 export interface StarProps {

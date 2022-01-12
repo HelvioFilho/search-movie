@@ -7,13 +7,14 @@ import { api } from '../../services/api';
 const { API_KEY } = process.env;
 import { MovieProps, stackParamList } from '../../utils/interface';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Modal } from 'react-native';
-
+import { ActivityIndicator, Modal } from 'react-native';
+import { defaultTheme } from '../../global';
 
 export function Detail() {
 
   const navigation = useNavigation();
-  const route = useRoute<RouteProp<stackParamList>>();
+  const [loading, setLoading] = useState(true);
+  const route = useRoute<RouteProp<stackParamList, 'Detail'>>();
   const [movie, setMovie] = useState<MovieProps>({} as MovieProps);
   const [visible, setVisible] = useState(false);
 
@@ -30,6 +31,7 @@ export function Detail() {
 
       if (isActive) {
         setMovie(response.data);
+        setLoading(false);
       }
     }
 
@@ -39,6 +41,21 @@ export function Detail() {
       isActive = false;
     }
   }, []);
+
+  if (loading) {
+    return (
+      <Container
+        flex={1}
+        bg="bg"
+        pt={4}
+        pb={4}
+        align="center"
+        justify="center"
+      >
+        <ActivityIndicator size="large" color={defaultTheme.colors.white} />
+      </Container>
+    )
+  }
 
   return (
 

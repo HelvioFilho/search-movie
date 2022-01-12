@@ -39,10 +39,16 @@ export function ModalLink({ link, title, closeModal }: ModalLinkProps) {
         startInLoadingState={true}
         renderLoading={() =>
           <Container
-            flex={1}
+            height="100%"
+            justify="center"
             align="center"
           >
-            <CustomText color="black" mb={10} >Carregando...</CustomText>
+            <CustomText
+              color="black"
+              mb={10}
+            >
+              Carregando...
+            </CustomText>
             <ActivityIndicator size="large" color={defaultTheme.colors.black} />
           </Container>
         }
@@ -52,7 +58,11 @@ export function ModalLink({ link, title, closeModal }: ModalLinkProps) {
         }}
 
         renderError={(error) => (
-          <Container height="100%" justify="center" align="center">
+          <Container
+            height="100%"
+            justify="center"
+            align="center"
+          >
             <CustomText
               color="black"
               size={16}
