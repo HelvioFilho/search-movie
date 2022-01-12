@@ -69,6 +69,7 @@ export interface MovieProps {
   vote_average: number;
   poster_path: string;
   homepage: string;
+  release_date: string;
   genres: [GenresProps];
 }
 

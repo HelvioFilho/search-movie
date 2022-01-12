@@ -156,7 +156,7 @@ export function Detail() {
         horizontal
         showsHorizontalScrollIndicator={false}
         keyExtractor={(item) => String(item.id)}
-        renderItem={(genres) => <Genres genres={genres.item} />}
+        renderItem={({ item }) => <Genres genres={item} />}
       />
       <CustomText
         size={22}

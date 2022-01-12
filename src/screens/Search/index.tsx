@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { RouteProp, useRoute } from '@react-navigation/native';
-import { Container, CustomText } from '../../components';
+import { NavigationProp, RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { Container, SlideSearch } from '../../components';
 import { MovieProps, stackParamList } from '../../utils/interface';
 import { ActivityIndicator } from 'react-native';
 import { defaultTheme } from '../../global';
 import { api } from '../../services/api';
+import { FlatList } from 'react-native-gesture-handler';
 
 const { API_KEY } = process.env;
 
@@ -14,6 +15,11 @@ export function Search() {
   const [movies, setMovies] = useState<MovieProps[]>([] as MovieProps[]);
 
   const route = useRoute<RouteProp<stackParamList, 'Search'>>();
+  const navigation = useNavigation<NavigationProp<stackParamList>>();
+
+  function navigateDetailsPage(movie: MovieProps) {
+    navigation.navigate('Detail', { id: movie.id });
+  }
 
   useEffect(() => {
     let isActive = true;
@@ -64,8 +70,15 @@ export function Search() {
   return (
     <Container
       bg="bg"
+      align="stretch"
+      height="100%"
     >
-      <CustomText>Página Search</CustomText>
+      <FlatList
+        data={movies}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item) => String(item.id)}
+        renderItem={({ item }) => <SlideSearch data={item} navigatePage={() => navigateDetailsPage(item)} />}
+      />
     </Container>
   );
 }

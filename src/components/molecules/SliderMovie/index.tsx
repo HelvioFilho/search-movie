@@ -26,6 +26,5 @@ export function SliderMovie({ data, navigatePage }: SliderMovieProps) {
         </Container>
       </Touch>
     </Container>
-
   );
 }
