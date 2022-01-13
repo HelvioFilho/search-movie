@@ -9,14 +9,39 @@ import { MovieProps, stackParamList } from '../../utils/interface';
 import { ScrollView } from 'react-native-gesture-handler';
 import { ActivityIndicator, Modal } from 'react-native';
 import { defaultTheme } from '../../global';
+import { useFavorite } from '../../services';
 
 export function Detail() {
 
   const navigation = useNavigation();
-  const [loading, setLoading] = useState(true);
   const route = useRoute<RouteProp<stackParamList, 'Detail'>>();
+
+  const [loading, setLoading] = useState(true);
   const [movie, setMovie] = useState<MovieProps>({} as MovieProps);
   const [visible, setVisible] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const { addFavorites, removeFavorites, getFavorites } = useFavorite();
+
+  async function handleAddFavorite() {
+    await addFavorites(movie);
+    checkIsFavorite();
+  }
+
+  async function handleDeleteFavorite() {
+    await removeFavorites(`${movie.id}${movie.title}`);
+    checkIsFavorite();
+  }
+
+  async function checkIsFavorite() {
+    const favorites = await getFavorites();
+    setIsFavorite(
+      favorites
+        .filter(
+          (item) => `${item.id}${item.title}` === `${movie.id}${movie.title}`
+        )
+        .length > 0);
+  }
 
   useEffect(() => {
     let isActive = true;
@@ -31,16 +56,20 @@ export function Detail() {
 
       if (isActive) {
         setMovie(response.data);
+        checkIsFavorite();
         setLoading(false);
       }
     }
-
     getMovie();
 
     return () => {
       isActive = false;
     }
   }, []);
+
+  useEffect(() => {
+    checkIsFavorite();
+  }, [movie])
 
   if (loading) {
     return (
@@ -78,7 +107,7 @@ export function Detail() {
           align="center"
         />
         <IconButton
-          ionicons="bookmark"
+          ionicons={isFavorite ? "bookmark" : "bookmark-outline"}
           size={28}
           color="white"
           width={46}
@@ -86,7 +115,13 @@ export function Detail() {
           bg="bgIcon"
           br={23}
           justify="center"
-          align="center" />
+          align="center"
+          onPress={() =>
+            isFavorite
+              ? handleDeleteFavorite()
+              : handleAddFavorite()
+          }
+        />
       </HeaderDetail>
       <CustomImage
         resizeMethod="resize"

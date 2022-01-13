@@ -77,6 +77,12 @@ export interface GenresListProps {
   genres: GenresProps;
 }
 
+export interface StorageMovie {
+  [id: string]: {
+    data: MovieProps;
+  }
+}
+
 export interface SliderMovieProps {
   data: MovieProps;
   navigatePage: (data: MovieProps) => void;
