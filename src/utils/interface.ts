@@ -88,6 +88,10 @@ export interface SliderMovieProps {
   navigatePage: (data: MovieProps) => void;
 }
 
+export interface SearchListProps extends SliderMovieProps {
+  delMovie: (data: MovieProps) => void;
+}
+
 export type stackParamList = {
   Detail: { id: number };
   Search: { search: string };

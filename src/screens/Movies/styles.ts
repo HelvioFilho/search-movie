@@ -1,12 +1,6 @@
+import { FlatList } from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-`;
-
-export const Title = styled.Text`
-  
-`;
+export const FlatFavorite = (styled.FlatList`
+  margin-bottom: 10px;
+`as unknown) as typeof FlatList;

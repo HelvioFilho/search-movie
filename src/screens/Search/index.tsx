@@ -50,7 +50,7 @@ export function Search() {
       isActive = false;
     }
 
-  }, []);
+  });
 
   if (loading) {
     return (

@@ -56,20 +56,16 @@ export function Detail() {
 
       if (isActive) {
         setMovie(response.data);
-        checkIsFavorite();
         setLoading(false);
       }
     }
     getMovie();
+    checkIsFavorite();
 
     return () => {
       isActive = false;
     }
-  }, []);
-
-  useEffect(() => {
-    checkIsFavorite();
-  }, [movie])
+  });
 
   if (loading) {
     return (
