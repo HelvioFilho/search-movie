@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Container, CustomImage, CustomText, Genres, IconButton, ModalLink, StarIcon } from '../../components';
 import { HeaderDetail, ListGenres } from './styles';
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { NavigationProp, RouteProp, useIsFocused, useNavigation, useRoute } from '@react-navigation/native';
 
 import { api } from '../../services/api';
 const { API_KEY } = process.env;
-import { MovieProps, stackParamList } from '../../utils/interface';
+import { drawerParamList, MovieProps, stackParamList } from '../../utils/interface';
 import { ScrollView } from 'react-native-gesture-handler';
 import { ActivityIndicator, Modal } from 'react-native';
 import { defaultTheme } from '../../global';
@@ -13,8 +13,9 @@ import { useFavorite } from '../../services';
 
 export function Detail() {
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp<drawerParamList>>();
   const route = useRoute<RouteProp<stackParamList, 'Detail'>>();
+  const isFocused = useIsFocused();
 
   const [loading, setLoading] = useState(true);
   const [movie, setMovie] = useState<MovieProps>({} as MovieProps);
@@ -60,12 +61,21 @@ export function Detail() {
       }
     }
     getMovie();
-    checkIsFavorite();
 
     return () => {
       isActive = false;
+      if (route.params.return === "Movies") {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'Home' }],
+        });
+      }
     }
-  });
+  }, [isFocused]);
+
+  useEffect(() => {
+    checkIsFavorite();
+  }, [movie]);
 
   if (loading) {
     return (
@@ -91,7 +101,18 @@ export function Detail() {
     >
       <HeaderDetail>
         <IconButton
-          onPress={() => navigation.goBack()}
+
+          onPress={() =>
+            route.params.return === 'Search' ?
+              navigation.goBack()
+              :
+              navigation.navigate(
+                route.params.return === 'Home' ?
+                  'Home'
+                  :
+                  'Movies'
+              )
+          }
           feather="arrow-left"
           size={28}
           color="white"

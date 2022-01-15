@@ -83,7 +83,7 @@ export function Home() {
   }, [])
 
   function navigateDetailsPage(item: MovieProps) {
-    navigation.navigate('Detail', { id: item.id });
+    navigation.navigate('Detail', { id: item.id, return: 'Home' });
   }
 
   function handleSearchMovie() {

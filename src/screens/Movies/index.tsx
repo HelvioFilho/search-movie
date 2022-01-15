@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { NavigationProp, useNavigation, useIsFocused } from '@react-navigation/native';
-import { Container, FavoriteItem, Header } from '../../components';
+import { Container, CustomText, FavoriteItem, Header } from '../../components';
 
 import { MovieProps, stackParamList } from '../../utils/interface';
 import { defaultTheme } from '../../global';
@@ -36,7 +36,7 @@ export function Movies() {
   }, [isFocused]);
 
   function navigateDetailsPage(movie: MovieProps) {
-    navigation.navigate('Detail', { id: movie.id })
+    navigation.navigate('Detail', { id: movie.id, return: 'Movies' })
   }
 
   async function handleDeleteFavorite(movie: MovieProps) {
@@ -68,17 +68,28 @@ export function Movies() {
       pb={4}
     >
       <Header title="Minha lista" />
-      <FlatFavorite
-        data={movies}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={(item) => String(item.id)}
-        renderItem={({ item }) =>
-          <FavoriteItem
-            data={item}
-            delMovie={() => handleDeleteFavorite(item)}
-            navigatePage={() => navigateDetailsPage(item)}
-          />}
-      />
+      {movies.length > 0 ?
+        <FlatFavorite
+          data={movies}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item) => String(item.id)}
+          renderItem={({ item }) =>
+            <FavoriteItem
+              data={item}
+              delMovie={() => handleDeleteFavorite(item)}
+              navigatePage={() => navigateDetailsPage(item)}
+            />}
+        />
+        :
+        <CustomText
+          size={18}
+          align="center"
+          pl={40}
+          pr={40}
+          mt={30}
+          lineHeight={22}
+        >Você ainda não adicionou {'\n'} nenhum filme a sua lista!</CustomText>
+      }
     </Container>
   );
 }

@@ -10,7 +10,9 @@ function StackRoute() {
   const { Navigator, Screen } = createNativeStackNavigator<ParamListBase>();
 
   return (
-    <Navigator>
+    <Navigator
+      initialRouteName='Home'
+    >
       <Screen
         name="Home"
         component={Home}
@@ -33,7 +35,7 @@ function StackRoute() {
           title: 'Sua busca',
           headerTintColor: defaultTheme.colors.white,
           headerTitleStyle: {
-            color: defaultTheme.colors.white,
+            fontSize: defaultTheme.metrics.px(30),
           },
           headerStyle: {
             backgroundColor: defaultTheme.colors.bg

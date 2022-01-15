@@ -93,8 +93,19 @@ export interface SearchListProps extends SliderMovieProps {
 }
 
 export type stackParamList = {
-  Detail: { id: number };
-  Search: { search: string };
+  Detail: {
+    id: number;
+    return: string;
+  };
+  Search: {
+    search: string;
+  };
+}
+
+export type drawerParamList = {
+  Home: undefined;
+  Movies: undefined;
+  Search: undefined;
 }
 
 export interface StarProps {
@@ -110,4 +121,8 @@ export interface ModalLinkProps {
   link: string;
   title: string;
   closeModal: () => void;
+}
+
+export interface ModalAlert {
+
 }

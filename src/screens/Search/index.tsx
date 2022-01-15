@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { NavigationProp, RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { Container, SlideSearch } from '../../components';
+import { Container, CustomText, SlideSearch } from '../../components';
 import { MovieProps, stackParamList } from '../../utils/interface';
 import { ActivityIndicator } from 'react-native';
 import { defaultTheme } from '../../global';
@@ -18,7 +18,7 @@ export function Search() {
   const navigation = useNavigation<NavigationProp<stackParamList>>();
 
   function navigateDetailsPage(movie: MovieProps) {
-    navigation.navigate('Detail', { id: movie.id });
+    navigation.navigate('Detail', { id: movie.id, return: 'Search' });
   }
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export function Search() {
       isActive = false;
     }
 
-  });
+  }, []);
 
   if (loading) {
     return (
@@ -73,12 +73,27 @@ export function Search() {
       align="stretch"
       height="100%"
     >
-      <FlatList
-        data={movies}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={(item) => String(item.id)}
-        renderItem={({ item }) => <SlideSearch data={item} navigatePage={() => navigateDetailsPage(item)} />}
-      />
+      {movies.length > 0 ?
+        <FlatList
+          data={movies}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item) => String(item.id)}
+          renderItem={({ item }) => <SlideSearch data={item} navigatePage={() => navigateDetailsPage(item)} />}
+        />
+        :
+        <CustomText
+          size={18}
+          align="center"
+          pl={40}
+          pr={40}
+          mt={30}
+          lineHeight={22}
+        >
+          Nenhum filme foi encontrado! {'\n'}
+          Verifique a ortografia ou tente {'\n'}
+          buscar por outro filme!
+        </CustomText>
+      }
     </Container>
   );
 }
