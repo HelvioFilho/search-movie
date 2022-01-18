@@ -105,7 +105,6 @@ export type stackParamList = {
 export type drawerParamList = {
   Home: undefined;
   Movies: undefined;
-  Search: undefined;
 }
 
 export interface StarProps {

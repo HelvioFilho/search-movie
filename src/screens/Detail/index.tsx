@@ -1,15 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { Container, CustomImage, CustomText, Genres, IconButton, ModalLink, StarIcon } from '../../components';
-import { HeaderDetail, ListGenres } from './styles';
-import { NavigationProp, RouteProp, useIsFocused, useNavigation, useRoute } from '@react-navigation/native';
-
-import { api } from '../../services/api';
-const { API_KEY } = process.env;
-import { drawerParamList, MovieProps, stackParamList } from '../../utils/interface';
-import { ScrollView } from 'react-native-gesture-handler';
 import { ActivityIndicator, Modal } from 'react-native';
+import {
+  NavigationProp,
+  RouteProp,
+  useIsFocused,
+  useNavigation,
+  useRoute
+} from '@react-navigation/native';
+import { ScrollView } from 'react-native-gesture-handler';
+import {
+  Container,
+  CustomImage,
+  CustomText,
+  Genres,
+  IconButton,
+  ModalLink,
+  StarIcon
+} from '../../components';
+import { drawerParamList, MovieProps, stackParamList } from '../../utils/interface';
+import { useFavorite, api } from '../../services';
+import { HeaderDetail, ListGenres } from './styles';
 import { defaultTheme } from '../../global';
-import { useFavorite } from '../../services';
+
+const { API_KEY } = process.env;
 
 export function Detail() {
 

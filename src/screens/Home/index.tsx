@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ScrollView, ActivityIndicator } from 'react-native';
 import {
   Container,
   CustomImage,
@@ -8,14 +9,14 @@ import {
   IconButton,
   SliderMovie
 } from '../../components';
-import { ScrollView, ActivityIndicator } from 'react-native';
 import { Slider } from './styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { api } from '../../services/api';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+
 import { getListMovies, radomBanner } from '../../utils/movie';
 import { MovieProps, stackParamList } from '../../utils/interface';
 import { defaultTheme } from '../../global';
-import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { api } from '../../services';
 
 const { API_KEY } = process.env;
 

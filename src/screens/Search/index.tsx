@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { NavigationProp, RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { Container, CustomText, SlideSearch } from '../../components';
 import { MovieProps, stackParamList } from '../../utils/interface';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, FlatList } from 'react-native';
 import { defaultTheme } from '../../global';
-import { api } from '../../services/api';
-import { FlatList } from 'react-native-gesture-handler';
+import { api } from '../../services';
 
 const { API_KEY } = process.env;
 
