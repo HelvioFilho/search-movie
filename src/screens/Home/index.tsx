@@ -65,8 +65,8 @@ export function Home() {
 
       if (isActive) {
         const nowList = getListMovies(20, nowData.data.results);
-        const popularList = getListMovies(5, popularData.data.results);
-        const topList = getListMovies(5, topData.data.results);
+        const popularList = getListMovies(10, popularData.data.results);
+        const topList = getListMovies(10, topData.data.results);
         setBannerMovie(nowData.data.results[radomBanner(nowData.data.results)]);
         setNowMovies(nowList);
         setPopularMovies(popularList);

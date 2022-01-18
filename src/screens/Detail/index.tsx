@@ -126,126 +126,128 @@ export function Detail() {
       bg="bg"
       pb={4}
     >
-      <HeaderDetail>
-        <IconButton
-
-          onPress={() =>
-            route.params.return === 'Search' ?
-              navigation.goBack()
-              :
-              navigation.navigate(
-                route.params.return === 'Home' ?
-                  'Home'
-                  :
-                  'Movies'
-              )
-          }
-          feather="arrow-left"
-          size={28}
-          color="white"
-          width={46}
-          height={46}
-          bg="bgIcon"
-          br={23}
-          justify="center"
-          align="center"
-        />
-        <IconButton
-          ionicons={isFavorite ? "bookmark" : "bookmark-outline"}
-          size={28}
-          color="white"
-          width={46}
-          height={46}
-          bg="bgIcon"
-          br={23}
-          justify="center"
-          align="center"
-          onPress={() =>
-            isFavorite
-              ? handleDeleteFavorite()
-              : handleAddFavorite()
-          }
-        />
-      </HeaderDetail>
-      <CustomImage
-        resizeMethod="resize"
-        source={{ uri: `https://image.tmdb.org/t/p/original${movie.poster_path}` }}
-        CWidth="100%"
-        CHeight={350}
-        bblr={50}
-        bbrr={50}
-      />
-      {movie.homepage !== '' &&
-        <IconButton
-          feather="link"
-          size={28}
-          color="white"
-          bg="cta"
-          width={63}
-          height={63}
-          br={35}
-          justify="center"
-          align="center"
-          redBottom={true}
-          onPress={() => setVisible(true)}
-        />
-      }
-      <Container
-        bg="bg"
-        direction="row"
-        align="center"
-        justify="space-between"
-        width="100%"
-      >
-        <CustomText
-          numberOfLines={2}
-          size={22}
-          fontFamily="bold"
-          pt={12}
-          pb={8}
-          pl={14}
-          pr={14}
-          mt={12}
-          width="75%"
-        >{movie.title}</CustomText>
-        <CustomText
-          size={22}
-          fontFamily="bold"
-          pt={12}
-          pb={8}
-          pl={14}
-          pr={14}
-          mt={12}
-          width="25%"
-          align="right"
-        >{movie.vote_average}/10</CustomText>
-      </Container>
-      <Container
-        direction="row"
-        bg="bg"
-        align="center"
-        justify="space-between"
-        pl={14}
-        pr={14}
-      >
-        <StarIcon rate={movie.vote_average} />
-      </Container>
-      <ListGenres
-        data={movie?.genres}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        keyExtractor={(item) => String(item.id)}
-        renderItem={({ item }) => <Genres genres={item} />}
-      />
-      <CustomText
-        size={22}
-        fontFamily="bold"
-        pl={14}
-        pr={14}
-        pt={10}
-        pb={10}
-      >Descrição</CustomText>
       <ScrollView showsHorizontalScrollIndicator={false}>
+        <HeaderDetail>
+          <IconButton
+
+            onPress={() =>
+              route.params.return === 'Search' ?
+                navigation.goBack()
+                :
+                navigation.navigate(
+                  route.params.return === 'Home' ?
+                    'Home'
+                    :
+                    'Movies'
+                )
+            }
+            feather="arrow-left"
+            size={28}
+            color="white"
+            width={46}
+            height={46}
+            bg="bgIcon"
+            br={23}
+            justify="center"
+            align="center"
+          />
+          <IconButton
+            ionicons={isFavorite ? "bookmark" : "bookmark-outline"}
+            size={28}
+            color="white"
+            width={46}
+            height={46}
+            bg="bgIcon"
+            br={23}
+            justify="center"
+            align="center"
+            onPress={() =>
+              isFavorite
+                ? handleDeleteFavorite()
+                : handleAddFavorite()
+            }
+          />
+        </HeaderDetail>
+        <CustomImage
+          resizeMethod="resize"
+          resizeMode="stretch"
+          source={{ uri: `https://image.tmdb.org/t/p/original${movie.poster_path}` }}
+          CWidth="100%"
+          CHeight={450}
+          bblr={50}
+          bbrr={50}
+        />
+        {movie.homepage !== '' &&
+          <IconButton
+            feather="link"
+            size={28}
+            color="white"
+            bg="cta"
+            width={63}
+            height={63}
+            br={35}
+            justify="center"
+            align="center"
+            redBottom={true}
+            onPress={() => setVisible(true)}
+          />
+        }
+        <Container
+          bg="bg"
+          direction="row"
+          align="center"
+          justify="space-between"
+          width="100%"
+        >
+          <CustomText
+            numberOfLines={2}
+            size={22}
+            fontFamily="bold"
+            pt={12}
+            pb={8}
+            pl={14}
+            pr={14}
+            mt={12}
+            width="75%"
+          >{movie.title}</CustomText>
+          <CustomText
+            size={22}
+            fontFamily="bold"
+            pt={12}
+            pb={8}
+            pl={14}
+            pr={14}
+            mt={12}
+            width="25%"
+            align="right"
+          >{movie.vote_average}/10</CustomText>
+        </Container>
+        <Container
+          direction="row"
+          bg="bg"
+          align="center"
+          justify="space-between"
+          pl={14}
+          pr={14}
+        >
+          <StarIcon rate={movie.vote_average} />
+        </Container>
+        <ListGenres
+          data={movie?.genres}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={(item) => String(item.id)}
+          renderItem={({ item }) => <Genres genres={item} />}
+        />
+        <CustomText
+          size={22}
+          fontFamily="bold"
+          pl={14}
+          pr={14}
+          pt={10}
+          pb={10}
+        >Descrição</CustomText>
+
         <CustomText
           pl={14}
           pr={14}
