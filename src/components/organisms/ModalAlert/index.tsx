@@ -3,13 +3,7 @@ import { Feather } from '@expo/vector-icons';
 import { Container, CustomText } from '../../atoms';
 import { ButtonModal, IconX } from './styles';
 import { defaultTheme } from '../../../global';
-
-interface ModalAlertProps {
-  alertMessage: string;
-  closeModal: () => void;
-  delFavoriteModal: () => void;
-  choice: boolean;
-}
+import { ModalAlertProps } from '../../../utils/interface';
 
 export function ModalAlert({ alertMessage, closeModal, delFavoriteModal, choice }: ModalAlertProps) {
   return (
@@ -54,7 +48,6 @@ export function ModalAlert({ alertMessage, closeModal, delFavoriteModal, choice 
             justify="space-between"
             align="center"
           >
-
             <ButtonModal
               color="cta"
               onPress={() => closeModal()}

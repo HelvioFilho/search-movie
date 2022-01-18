@@ -122,6 +122,9 @@ export interface ModalLinkProps {
   closeModal: () => void;
 }
 
-export interface ModalAlert {
-
+export interface ModalAlertProps {
+  alertMessage: string;
+  closeModal: () => void;
+  delFavoriteModal: () => void;
+  choice: boolean;
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Modal } from 'react-native';
 import { NavigationProp, useNavigation, useIsFocused } from '@react-navigation/native';
-import { Container, CustomText, FavoriteItem, Header } from '../../components';
+import { Container, CustomText, FavoriteItem, Header, ModalAlert } from '../../components';
 
 import { MovieProps, stackParamList } from '../../utils/interface';
 import { defaultTheme } from '../../global';
@@ -10,6 +10,10 @@ import { FlatFavorite } from './styles';
 
 export function Movies() {
   const [loading, setLoading] = useState(true);
+  const [visible, setVisible] = useState(false);
+  const [choice, setChoice] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [idMovie, setIdMovie] = useState('');
   const [movies, setMovies] = useState<MovieProps[]>([]);
 
   const { removeFavorites, getFavorites } = useFavorite();
@@ -39,9 +43,19 @@ export function Movies() {
     navigation.navigate('Detail', { id: movie.id, return: 'Movies' })
   }
 
-  async function handleDeleteFavorite(movie: MovieProps) {
-    await removeFavorites(`${movie.id}${movie.title}`);
+  async function delFavoriteMovie() {
+    await removeFavorites(idMovie);
+    setAlertMessage("Filme removido dos favoritos com sucesso!");
+    setVisible(true);
+    setChoice(false);
     getFavoritesMovies();
+  }
+
+  async function handleDeleteFavorite(movie: MovieProps) {
+    setIdMovie(`${movie.id}${movie.title}`);
+    setAlertMessage("Tem certeza que deseja remover esse filme da lista?");
+    setChoice(true);
+    setVisible(true);
   }
 
   if (loading) {
@@ -90,6 +104,22 @@ export function Movies() {
           lineHeight={22}
         >Você ainda não adicionou {'\n'} nenhum filme a sua lista!</CustomText>
       }
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={visible}
+      >
+        <ModalAlert
+          alertMessage={alertMessage}
+          choice={choice}
+          closeModal={() => {
+            setVisible(false);
+            setAlertMessage('');
+            setIdMovie('');
+          }}
+          delFavoriteModal={() => delFavoriteMovie()}
+        />
+      </Modal>
     </Container>
   );
 }

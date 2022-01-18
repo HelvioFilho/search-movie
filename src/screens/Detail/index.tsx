@@ -56,7 +56,6 @@ export function Detail() {
   }
 
   function handleDeleteFavorite() {
-    // await removeFavorites(`${movie.id}${movie.title}`);
     setAlertMessage("Tem certeza que deseja remover esse filme da lista?");
     setChoice(true);
     setVisible(true);
