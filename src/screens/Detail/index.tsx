@@ -14,6 +14,7 @@ import {
   CustomText,
   Genres,
   IconButton,
+  ModalAlert,
   ModalLink,
   StarIcon
 } from '../../components';
@@ -32,19 +33,33 @@ export function Detail() {
 
   const [loading, setLoading] = useState(true);
   const [movie, setMovie] = useState<MovieProps>({} as MovieProps);
+  const [alertMessage, setAlertMessage] = useState<string>('');
   const [visible, setVisible] = useState(false);
+  const [choice, setChoice] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
 
   const { addFavorites, removeFavorites, getFavorites } = useFavorite();
 
   async function handleAddFavorite() {
     await addFavorites(movie);
+    setAlertMessage("Filme adicionado aos favoritos com sucesso!");
+    setVisible(true);
     checkIsFavorite();
   }
 
-  async function handleDeleteFavorite() {
+  async function delFavoriteMovie() {
     await removeFavorites(`${movie.id}${movie.title}`);
+    setAlertMessage("Filme removido dos favoritos com sucesso!");
+    setVisible(true);
+    setChoice(false);
     checkIsFavorite();
+  }
+
+  function handleDeleteFavorite() {
+    // await removeFavorites(`${movie.id}${movie.title}`);
+    setAlertMessage("Tem certeza que deseja remover esse filme da lista?");
+    setChoice(true);
+    setVisible(true);
   }
 
   async function checkIsFavorite() {
@@ -240,15 +255,27 @@ export function Detail() {
         >{movie.overview}</CustomText>
       </ScrollView>
       <Modal
-        animationType="slide"
+        animationType={alertMessage === '' ? "slide" : "fade"}
         transparent={true}
         visible={visible}
       >
-        <ModalLink
-          link={movie?.homepage}
-          title={movie?.title}
-          closeModal={() => setVisible(false)}
-        />
+        {alertMessage !== '' ?
+          <ModalAlert
+            alertMessage={alertMessage}
+            choice={choice}
+            closeModal={() => {
+              setVisible(false);
+              setAlertMessage('');
+            }}
+            delFavoriteModal={() => delFavoriteMovie()}
+          />
+          :
+          <ModalLink
+            link={movie?.homepage}
+            title={movie?.title}
+            closeModal={() => setVisible(false)}
+          />
+        }
       </Modal>
     </Container>
   );
