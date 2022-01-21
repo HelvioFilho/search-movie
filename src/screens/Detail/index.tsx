@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Modal } from 'react-native';
+import { Modal } from 'react-native';
 import {
   NavigationProp,
   RouteProp,
@@ -14,6 +14,7 @@ import {
   CustomText,
   Genres,
   IconButton,
+  Loading,
   ModalAlert,
   ModalLink,
   StarIcon
@@ -21,7 +22,6 @@ import {
 import { drawerParamList, MovieProps, stackParamList } from '../../utils/interface';
 import { useFavorite, api } from '../../services';
 import { HeaderDetail, ListGenres } from './styles';
-import { defaultTheme } from '../../global';
 
 const { API_KEY } = process.env;
 
@@ -106,16 +106,7 @@ export function Detail() {
 
   if (loading) {
     return (
-      <Container
-        flex={1}
-        bg="bg"
-        pt={4}
-        pb={4}
-        align="center"
-        justify="center"
-      >
-        <ActivityIndicator size="large" color={defaultTheme.colors.white} />
-      </Container>
+      <Loading />
     )
   }
 

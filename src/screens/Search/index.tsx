@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { NavigationProp, RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { Container, CustomText, SlideSearch } from '../../components';
+import { Container, CustomText, Loading, SlideSearch } from '../../components';
 import { MovieProps, stackParamList } from '../../utils/interface';
-import { ActivityIndicator, FlatList } from 'react-native';
-import { defaultTheme } from '../../global';
+import { FlatList } from 'react-native';
 import { api } from '../../services';
 
 const { API_KEY } = process.env;
@@ -53,16 +52,7 @@ export function Search() {
 
   if (loading) {
     return (
-      <Container
-        flex={1}
-        bg="bg"
-        pt={4}
-        pb={4}
-        align="center"
-        justify="center"
-      >
-        <ActivityIndicator size="large" color={defaultTheme.colors.white} />
-      </Container>
+      <Loading />
     )
   }
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, ActivityIndicator } from 'react-native';
+import { ScrollView } from 'react-native';
 import {
   Container,
   CustomImage,
@@ -7,7 +7,8 @@ import {
   CustomInput,
   Header,
   IconButton,
-  SliderMovie
+  SliderMovie,
+  Loading
 } from '../../components';
 import { Slider } from './styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -15,7 +16,6 @@ import { useNavigation, NavigationProp } from '@react-navigation/native';
 
 import { getListMovies, radomBanner } from '../../utils/movie';
 import { MovieProps, stackParamList } from '../../utils/interface';
-import { defaultTheme } from '../../global';
 import { api } from '../../services';
 
 const { API_KEY } = process.env;
@@ -95,16 +95,7 @@ export function Home() {
 
   if (loading) {
     return (
-      <Container
-        flex={1}
-        bg="bg"
-        pt={4}
-        pb={4}
-        align="center"
-        justify="center"
-      >
-        <ActivityIndicator size="large" color={defaultTheme.colors.white} />
-      </Container>
+      <Loading />
     )
   }
 

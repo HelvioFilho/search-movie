@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Modal } from 'react-native';
+import { Modal } from 'react-native';
 import { NavigationProp, useNavigation, useIsFocused } from '@react-navigation/native';
-import { Container, CustomText, FavoriteItem, Header, ModalAlert } from '../../components';
+import { Container, CustomText, FavoriteItem, Header, Loading, ModalAlert } from '../../components';
 
 import { MovieProps, stackParamList } from '../../utils/interface';
-import { defaultTheme } from '../../global';
 import { useFavorite } from '../../services';
 import { FlatFavorite } from './styles';
 
@@ -23,6 +22,7 @@ export function Movies() {
   async function getFavoritesMovies() {
     const response = await getFavorites();
     setMovies(response);
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -30,7 +30,6 @@ export function Movies() {
 
     if (isActive) {
       getFavoritesMovies();
-      setLoading(false);
     }
 
     return () => {
@@ -60,16 +59,7 @@ export function Movies() {
 
   if (loading) {
     return (
-      <Container
-        flex={1}
-        bg="bg"
-        pt={4}
-        pb={4}
-        align="center"
-        justify="center"
-      >
-        <ActivityIndicator size="large" color={defaultTheme.colors.white} />
-      </Container>
+      <Loading />
     )
   }
 
@@ -82,7 +72,7 @@ export function Movies() {
       pb={4}
     >
       <Header title="Minha lista" />
-      {movies.length > 0 ?
+      {movies.length > 0 && loading === false ?
         <FlatFavorite
           data={movies}
           showsVerticalScrollIndicator={false}
