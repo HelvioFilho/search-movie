@@ -8,7 +8,8 @@
 <a href="#project">Project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 <a href="#application">Application</a>
 <br>
-___
+
+---
 
 ## Technologies
 
