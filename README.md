@@ -1,7 +1,3 @@
-h1# Search Movie
-
-using a react-native-stars library with expo install react-native-stars
-
 <h1 align="center">
   <img alt="Search Movie" title="SearchMovie" src=".github/logo.svg" />
 </h1>
