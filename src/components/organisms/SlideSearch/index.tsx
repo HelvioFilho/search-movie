@@ -5,6 +5,11 @@ import { SearchSelect } from './styles';
 
 export function SlideSearch({ data, navigatePage }: SliderMovieProps) {
 
+  function formatDate(date: string): string {
+
+    return date.split('-').reverse().join('/');
+  }
+
   return (
     <SearchSelect onPress={() => navigatePage(data)}>
       {data.poster_path ? (
@@ -32,7 +37,7 @@ export function SlideSearch({ data, navigatePage }: SliderMovieProps) {
           <IconButton ionicons="md-star" size={12} color="warning" />
           <CustomText pl={4} size={12} >{data.vote_average}/10</CustomText>
         </Container>
-        <CustomText>Lançamento: {data.release_date.split('-').reverse().join('/')}</CustomText>
+        <CustomText>Lançamento: {data.release_date ? formatDate(data.release_date) : 'Não definido'}</CustomText>
       </Container>
     </SearchSelect>
   );

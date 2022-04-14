@@ -28,6 +28,7 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": "Application to search and save your favorite movies."
+    "description": "Application to search and save your favorite movies.",
+    "githubUrl": "https://github.com/HelvioFilho/search-movie"
   }
 }
