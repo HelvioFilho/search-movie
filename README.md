@@ -9,6 +9,10 @@
 <a href="#application">Application</a>
 <br>
 
+<p align="center">
+  <img height="500" alt="Uma demonstração de como o aplicativo funciona" src=".github/demo.gif">
+</p>
+
 ---
 
 ## Technologies
@@ -25,7 +29,7 @@ This project was developed using the following technologies:
 Clone the project and access the folder
 
 ```bash
-$git clone https://github.com/HelvioFilho/search-movie.git && cd search-movie
+$ git clone https://github.com/HelvioFilho/search-movie.git && cd search-movie
 ```
 
 Follow the steps below
